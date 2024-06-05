@@ -1,8 +1,7 @@
-from flask import Flask, redirect, url_for, render_template, request, make_response, session
+from flask import Flask, redirect, url_for, render_template, request, make_response, session, abort
 
 app = Flask(__name__)
 app.secret_key = 'jfdkhbgkjdfshdj'
-
 
 
 @app.route('/')
@@ -13,7 +12,7 @@ def index():
             "<b><a href = '/logout'>click here to log out</a></b>"
 
     return "You are not logged in <br><a href = '/login'></b>" + \
-            "click here to log in</b></a>"
+        "click here to log in</b></a>"
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -31,9 +30,11 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
+
 @app.route('/kue')
 def kue():
     return render_template('kue.html')
+
 
 @app.route('/setcookie', methods=['POST', 'GET'])
 def setccookie():
@@ -51,8 +52,7 @@ def setccookie():
 @app.route('/getcookie')
 def getcookie():
     name = request.cookies.get('userID')
-    return '<h1>Selamat datang '+name+'</h1>'
-
+    return '<h1>Selamat datang ' + name + '</h1>'
 
 
 @app.route('/student')
@@ -107,6 +107,27 @@ def hello_user(name):
         return redirect(url_for('hello_admin'))
     else:
         return redirect(url_for('hello_guest', guest=name))
+
+
+@app.route('/index1')
+def log_in():
+    return render_template('login1.html')
+
+
+@app.route('/login1', methods=['POST', 'GET'])
+def login1():
+    if request.method == 'POST':
+        if request.form['username'] == 'admin':
+            return redirect(url_for('success'))
+        else:
+            abort(429)
+    else:
+        return redirect(url_for('index1'))
+
+
+@app.route('/success')
+def success():
+    return 'anda telah login'
 
 
 if __name__ == '__main__':
