@@ -22,12 +22,7 @@ def login():
         session['username'] = request.form['username']
         return redirect(url_for('index'))
 
-    return '''
-            <form action = "" method = "post">
-            <p><input type = text name = username/></p>
-            <p<<input type = submit value = Login/></p>
-            </form>
-            '''
+    return render_template('login.html')
 
 
 @app.route('/logout')
