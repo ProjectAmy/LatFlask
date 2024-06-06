@@ -3,7 +3,7 @@
 <head>
     <script>
         function confirmDelete(studentId) {
-            var result = confirm("Are you sure you want to delete this student?");
+            var result = confirm("apakah anda ingin menghapus data murid ini?");
             if (result) {
                 document.getElementById("deleteForm_" + studentId).submit();
             }
@@ -43,6 +43,8 @@
             <form id="deleteForm_{{ student.id }}" action="/delete/{{ student.id }}" method="post" style="display: none;">
                 <input type="hidden" >
             </form>
+           <!-- Tautan untuk mengedit -->
+            <a href="{{ url_for('edit', id=student.id) }}">Edit</a>
         </td>
     </tr>
     {% endfor %}

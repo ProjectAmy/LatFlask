@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit data</title>
+</head>
+<body>
+<h2>Edit data</h2>
+<form action="{{ url_for('edit', id=student.id) }}" method="post">
+    <p>Name: <input type="text" name="name" value="{{ student.name }}"></p>
+    <p>City: <input type="text" name="city" value="{{ student.city }}"></p>
+    <p>Address: <input type="text" name="addr" value="{{ student.addr }}"></p>
+    <p>Pin: <input type="text" name="pin" value="{{ student.pin }}"></p>
+    <p><input type="submit" value="Save"></p>
+</form>
+<a href="{{ url_for('show_all') }}">kembali ke data siswa</a>
+</body>
+</html>
